@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 
 # -----------------------------------------------------------------------------
-# This is a Python 3 script for dictionary lookups of the Japanese language,
-# using the public Jisho.org API.
+# This is a Python 3 script for dictionary lookups from the Jisho.org
+# online Japanese language dictionary, using its public API.
 #
-# This script is not affiliated with Jisho.
+# This script is not affiliated with Jisho.org.
 # The license text below applies to this script file, and is not related to
-# Jisho or its language data sources' licensing in any way.
+# Jisho.org or its language data sources' licensing in any way.
 #
 # For more information about Jisho and the language data sources it uses,
-# please see the Jisho website:
+# please see the Jisho.org website:
 # https://jisho.org/about
 # -----------------------------------------------------------------------------
 
-# Copyright 2021 https://github.com/vakanen
+# This script copyright 2021 https://github.com/vakanen
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -53,7 +53,7 @@ if not CFG['ignore_script_name_mismatch']:
 	this_script_name = os.path.splitext(os.path.basename(__file__))[0]
 	if SCRIPT_NAME != this_script_name:
 		print_warning(f"This script name \"{this_script_name}\" != \"{SCRIPT_NAME}\".")
-		print_warning("(You can turn off this warning with the IGNORE_SCRIPT_MISMATCH variable.)\n")
+		print_warning("(You can turn off this warning in the config file with the ignore_script_name_mismatch option.)\n")
 
 def lookup(phrase):
 	"""Perform API lookup with a string.
@@ -68,6 +68,7 @@ def lookup(phrase):
 def main():
 	"""Entry point"""
 	def maxres_type(n):
+		"""Int type for argparse that requires values >= 0"""
 		n = int(n)
 		if n < 0:
 			raise argparse.ArgumentTypeError("Needs to be an integer >= 0")
