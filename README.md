@@ -5,7 +5,7 @@ A simple Python 3 CLI for searching the Jisho dictionary using its public API.
 
 ## Usage
 
-`jisho-cli` `[-h] [-m N] [--version]` `<one or more search keywords>`
+`jisho-cli.py` `[-h] [-m N] [--version]` `<one or more search keywords>`
 
 ### Config file location
 
