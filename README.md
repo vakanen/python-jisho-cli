@@ -1,5 +1,5 @@
 # python-jisho-cli
-A simple Python 3 script for searching the [Jisho dictionary](https://jisho.org/) using its public API.
+A simple Python 3 script for searching the [Jisho.org](https://jisho.org/) Japanese language dictionary API from the terminal.
 
 <details>
   <summary>CLI example (click to show)</summary>
