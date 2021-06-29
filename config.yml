@@ -12,7 +12,8 @@ warning_text_color: yellow # Default value: yellow
 success_text_color: green # Default value: green
 
 # By default, the script makes sure its name matches
-# this config file's path, for naming consistency.
+# this config file's path, for naming consistency
+# (eg: "~/.config/jisho-cli/config.yml").
 # You can ignore this check by changing this value to True.
 # Default value: False
 ignore_script_name_mismatch: False
