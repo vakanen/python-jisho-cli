@@ -65,7 +65,8 @@ if not CFG['ignore_script_name_mismatch']:
 def lookup(phrase):
     """Perform API lookup with a string.
     Prints a warning on non-HTTP 200 response (if it didn't except).
-    Returns a JSON object."""
+    Returns a JSON object.
+    """
     url = CFG['api_base_url'] + '/search/words?keyword=' + phrase
     r = requests.get(url)
     expected_response = 200
