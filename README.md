@@ -2,7 +2,7 @@
 A simple Python 3 script for searching the [Jisho dictionary](https://jisho.org/) using its public API.
 
 <details>
-  <summary>CLI example</summary>
+  <summary>CLI example (click to show)</summary>
 
 ![CLI example](example.svg?raw=true)
 </details>
