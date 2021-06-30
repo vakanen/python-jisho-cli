@@ -4,7 +4,7 @@
 A simple Python 3 script for searching the [Jisho.org](https://jisho.org/) Japanese language dictionary API from the terminal.
 
 <details>
-  <summary>CLI example (click to show)</summary>
+  <summary><i>CLI example (click to show)</i></summary>
 
 ![CLI example](example.svg?raw=true)
 </details>
