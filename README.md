@@ -19,8 +19,8 @@ A simple Python 3 script for searching the [Jisho.org](https://jisho.org/) Japan
 `jisho_cli.py` `[-h] [-m N] [--version]` `<one or more search keywords>`
 
 Examples:
-- `jisho_cli.py Test`
-- `jisho_cli.py Test |less # Results piped to less`
+- `./jisho_cli.py Test`
+- `./jisho_cli.py Test |less # Results piped to less`
 
 ### Config file location
 
