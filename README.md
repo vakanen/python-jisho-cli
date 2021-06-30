@@ -1,3 +1,5 @@
+[<img src="https://img.shields.io/github/license/vakanen/python-jisho-cli" />](LICENSE)
+
 # python-jisho-cli
 A simple Python 3 script for searching the [Jisho.org](https://jisho.org/) Japanese language dictionary API from the terminal.
 
