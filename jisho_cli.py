@@ -43,7 +43,7 @@ import yaml  # https://pypi.org/project/PyYAML/
 from termcolor import colored, cprint  # https://pypi.org/project/termcolor/
 
 SCRIPT_VERSION = '0.1'
-SCRIPT_NAME = 'jisho-cli'
+SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
 CFG = yaml.safe_load(open(CFG_PATH))
