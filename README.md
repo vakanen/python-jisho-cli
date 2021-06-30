@@ -1,12 +1,12 @@
 [<img src="https://img.shields.io/github/license/vakanen/python-jisho-cli" />](LICENSE)
 
 # python-jisho-cli
-A simple Python 3 script for searching the [Jisho.org](https://jisho.org/) Japanese language dictionary API from the terminal.
+A simple Python 3 CLI for searching the [Jisho.org](https://jisho.org/) Japanese language dictionary directly from the terminal.
 
 <details>
-  <summary><i>CLI example (click to show)</i></summary>
+  <summary><i>Terminal example (click to show)</i></summary>
 
-![CLI example](example.svg?raw=true)
+![Terminal example](example.svg?raw=true)
 </details>
 
 ## Usage
