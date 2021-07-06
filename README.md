@@ -42,7 +42,7 @@ mkdir -p ~/.config/jisho_cli && cp ./config.yml "$_"
 chmod +x ./jisho_cli.py
 
 # Install requirements
-pip install --user appdirs PyYAML requests termcolor
+pip install --user -r requirements.txt
 
 # Run the script
 ./jisho_cli.py "Test phrase" # Quotations for multi-words queries
