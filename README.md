@@ -58,3 +58,5 @@ alias jisho_cli=/path/to/python-jisho-cli/jisho_cli.py
 ### Config file location
 #### Linux
 `~/.config/jisho_cli/config.yml`
+#### Windows
+`%LOCALAPPDATA%\jisho_cli\jisho_cli\config.yml`
