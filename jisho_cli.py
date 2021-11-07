@@ -35,6 +35,7 @@
 
 import appdirs  # https://pypi.org/project/appdirs/
 import argparse
+import colorama
 import json
 import os
 import requests  # https://pypi.org/project/requests/
@@ -42,11 +43,13 @@ import sys
 import yaml  # https://pypi.org/project/PyYAML/
 from termcolor import colored, cprint  # https://pypi.org/project/termcolor/
 
-SCRIPT_VERSION = '0.1'
+SCRIPT_VERSION = '0.1.2'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
 CFG = yaml.safe_load(open(CFG_PATH))
+
+colorama.init()  # Required for color support on Windows command prompt
 
 
 def print_warning(msg):
@@ -57,7 +60,7 @@ if not CFG['ignore_script_name_mismatch']:
     this_script_name = os.path.splitext(os.path.basename(__file__))[0]
     if SCRIPT_NAME != this_script_name:
         print_warning(f'This script name "{this_script_name}" != '
-                      '{SCRIPT_NAME}".')
+                      f'{SCRIPT_NAME}".')
         print_warning('(You can turn off this warning in the config '
                       'file with the ignore_script_name_mismatch option.)\n')
 
@@ -72,15 +75,15 @@ def lookup(phrase):
     expected_response = 200
     if r.status_code != expected_response:
         print_warning(f'Warning: Unexpected HTTP response {r.status_code} '
-                      '(expected {expected_response})')
+                      f'(expected {expected_response})')
     j = r.json()
     api_response_status = j['meta']['status']
     if api_response_status != expected_response:
         print_warning(f'Warning: Unexpected API status code '
-                      '{api_response_status} (expected {expected_response})')
+                      f'{api_response_status} (expected {expected_response})')
     if api_response_status != r.status_code:
         print_warning(f'Warning: API status code ({api_response_status}) '
-                      'differs from HTTP response ({r.status_code})')
+                      f'differs from HTTP response ({r.status_code})')
     return j
 
 
