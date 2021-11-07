@@ -35,6 +35,7 @@
 
 import appdirs  # https://pypi.org/project/appdirs/
 import argparse
+import colorama
 import json
 import os
 import requests  # https://pypi.org/project/requests/
@@ -42,12 +43,13 @@ import sys
 import yaml  # https://pypi.org/project/PyYAML/
 from termcolor import colored, cprint  # https://pypi.org/project/termcolor/
 
-SCRIPT_VERSION = '0.1'
+SCRIPT_VERSION = '0.1.1'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
 CFG = yaml.safe_load(open(CFG_PATH))
 
+colorama.init()  # Required for color support on Windows command prompt
 
 def print_warning(msg):
     cprint(msg, CFG['warning_text_color'])
