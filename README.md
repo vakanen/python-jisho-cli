@@ -25,12 +25,24 @@ A simple Python 3 CLI for searching the [Jisho.org](https://jisho.org/) Japanese
 ## Installation
 
 ### Package dependencies
+Recommended to be installed via the *requirements.txt* file.
+
 - [appdirs](https://pypi.org/project/appdirs/)
+- [colorama](https://pypi.org/project/colorama/)
 - [Requests](https://pypi.org/project/requests/)
 - [PyYAML](https://pypi.org/project/PyYAML/)
 - [termcolor](https://pypi.org/project/termcolor/)
 
 ### Installation example
+Optional: use a <a target="_blank" rel="noopener noreferrer" href="https://docs.python.org/3/library/venv.html">virtual environment</a>:
+
+```bash
+python -m venv venv
+venv/scripts/activate
+```
+
+Installation:
+
 ```bash
 git clone https://github.com/vakanen/python-jisho-cli
 cd python-jisho-cli
@@ -49,7 +61,8 @@ pip install --user -r requirements.txt
 ./jisho_cli.py Test |less # Results piped to less
 ```
 
-Optionally, to shorten the command:
+Optionally, to shorten the invocation:
+
 ```bash
 # Alias in .bashrc or similar
 alias jisho_cli=/path/to/python-jisho-cli/jisho_cli.py
