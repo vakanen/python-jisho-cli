@@ -1,6 +1,7 @@
 appdirs==1.4.4
-certifi>=2021.5.30
+certifi>=2021.10.8
 chardet==4.0.0
+colorama==0.4.4
 idna==2.10
 PyYAML==5.4.1
 requests==2.25.1
