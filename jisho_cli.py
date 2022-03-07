@@ -38,9 +38,10 @@ import os
 import appdirs
 import requests
 import yaml
+from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.1.1'
+SCRIPT_VERSION = '0.1.2'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
@@ -48,6 +49,9 @@ CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
 with open(file=CFG_PATH, mode="r", encoding="utf-8") as f_cfg:
     CFG = yaml.safe_load(f_cfg)
 assert CFG is not None
+
+# Initialize Colorama for platform independent terminal colour support.
+init()
 
 
 def print_warning(msg):
