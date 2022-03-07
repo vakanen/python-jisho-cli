@@ -1,4 +1,4 @@
-[![MIT](https://img.shields.io/github/license/vakanen/python-jisho-cli)](LICENSE)
+[![MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Pylint](https://github.com/vakanen/python-jisho-cli/actions/workflows/pylint.yml/badge.svg)](https://github.com/vakanen/python-jisho-cli/actions/workflows/pylint.yml)
 
 # python-jisho-cli
