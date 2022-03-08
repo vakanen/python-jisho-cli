@@ -33,7 +33,7 @@ Recommended to be installed via the *requirements.txt* file.
 - [PyYAML](https://pypi.org/project/PyYAML/)
 - [termcolor](https://pypi.org/project/termcolor/)
 
-### Installation example
+### Installation example (Linux)
 Optional: use a <a target="_blank" rel="noopener noreferrer" href="https://docs.python.org/3/library/venv.html">virtual environment</a>:
 
 ```bash
