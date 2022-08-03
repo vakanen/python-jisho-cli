@@ -30,6 +30,12 @@ One-liner install with [pipx](https://github.com/pypa/pipx):
 pipx install git+https://github.com/vakanen/python-jisho-cli.git
 ```
 
+Upgrade with pipx:
+
+```bash
+pipx upgrade jisho-cli
+```
+
 Creating a config file (optional):
 
 ```bash
