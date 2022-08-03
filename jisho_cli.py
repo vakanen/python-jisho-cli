@@ -41,13 +41,42 @@ import yaml
 from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.1.3'
+SCRIPT_VERSION = '0.2.0'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
 
-with open(file=CFG_PATH, mode="r", encoding="utf-8") as f_cfg:
-    CFG = yaml.safe_load(f_cfg)
+# Try to open user-defined preferences
+try:
+    with open(file=CFG_PATH, mode='r', encoding='utf-8') as f_cfg:
+        CFG = yaml.safe_load(f_cfg)
+# But fall back to defaults if user config didn't exist.
+# Hardcoding this instead of reading the repo config, because
+# the user could've installed this package using custom tools
+# where we don't know the location (or even the existence) of config.yml.
+except FileNotFoundError:
+    CFG = yaml.safe_load("""
+        # The Jisho API url to use for lookups
+        # Default value: https://jisho.org/api/v1
+        api_base_url: https://jisho.org/api/v1
+
+        # How many dictionary definitions to return, at most.
+        # Use zero for no limit.
+        # Value has to be zero or a positive integer.
+        # Default value: 3
+        max_results_default: 3
+
+        # For possible values, see: https://pypi.org/project/termcolor/
+        warning_text_color: yellow # Default value: yellow
+        success_text_color: green # Default value: green
+
+        # By default, the script makes sure its name matches
+        # this config file's path, for naming consistency
+        # (eg: "~/.config/jisho-cli/config.yml").
+        # You can ignore this check by changing this value to True.
+        # Default value: False
+        ignore_script_name_mismatch: False
+    """)
 assert CFG is not None
 
 # Initialize Colorama for platform independent terminal colour support.
