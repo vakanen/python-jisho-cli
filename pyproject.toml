@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "jisho-cli"
+version = "0.1.3"
+description = "A simple Python 3 CLI for searching the Jisho.org Japanese language dictionary directly from the terminal."
+authors = ["vakanen <ge260vtan@mozmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+appdirs = "~1.4.4"
+certifi = ">=2021.10.8"
+chardet = "~4.0.0"
+colorama = "~0.4.4"
+idna = "^2.10"
+PyYAML = "~5.4.1"
+requests = "~2.25.1"
+termcolor = "~1.1.0"
+urllib3 = "~1.26.6"
+wincertstore = {version = "^0.2", markers = "sys_platform == 'win32' and python_version < '2.7.9'"}
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.14.5"
+
+[tool.poetry.scripts]
+jisho-cli = "jisho_cli:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
