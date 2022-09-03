@@ -41,7 +41,7 @@ import yaml
 from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.2.2'
+SCRIPT_VERSION = '0.2.3'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
@@ -104,7 +104,7 @@ def lookup(phrase):
     Returns a JSON object.
     """
     url = CFG['api_base_url'] + '/search/words?keyword=' + phrase
-    resp = requests.get(url)
+    resp = requests.get(url, timeout=10.0)
     resp.raise_for_status()
     expected_response = 200
     if resp.status_code != expected_response:
