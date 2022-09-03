@@ -41,7 +41,7 @@ import yaml
 from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.2.3'
+SCRIPT_VERSION = '0.2.4'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
