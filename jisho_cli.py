@@ -41,7 +41,7 @@ import yaml
 from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.2.1'
+SCRIPT_VERSION = '0.2.3'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
@@ -104,7 +104,7 @@ def lookup(phrase):
     Returns a JSON object.
     """
     url = CFG['api_base_url'] + '/search/words?keyword=' + phrase
-    resp = requests.get(url)
+    resp = requests.get(url, timeout=10.0)
     resp.raise_for_status()
     expected_response = 200
     if resp.status_code != expected_response:
@@ -130,12 +130,19 @@ def main():
             raise argparse.ArgumentTypeError('Needs to be an integer >= 0')
         return number
 
+    def phrase_type(phrase):
+        """Str type for argparse that requires values with len > 0"""
+        if len(phrase) == 0:
+            raise argparse.ArgumentTypeError('Phrase cannot be empty')
+        return phrase
+
     parser = argparse.ArgumentParser(
         prog=SCRIPT_NAME,
         description='Script for searching the Jisho.org dictionary from the '
                     'CLI.')
     parser.add_argument('phrase',
                         metavar='<one or more search keyword(s)>',
+                        type=phrase_type,
                         help='Word(s) to perform a Jisho.org dictionary API '
                              'lookup with. Can be in English or Japanese '
                              '(rōmaji input is also supported).')
