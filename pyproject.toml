@@ -3,7 +3,7 @@ name = "jisho-cli"
 version = "0.3.0"
 description = "A simple Python 3 CLI for searching the Jisho.org Japanese language dictionary directly from the terminal."
 authors = ["vakanen <ge260vtan@mozmail.com>"]
-license = "MIT"
+license = "GNU General Public License v3.0"
 
 [tool.poetry.dependencies]
 python = "^3.6"
