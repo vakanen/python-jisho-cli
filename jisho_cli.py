@@ -47,6 +47,8 @@ SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
 
+# pylint: disable=too-many-locals
+
 # Try to open user-defined preferences
 try:
     with open(file=CFG_PATH, mode='r', encoding='utf-8') as f_cfg:
@@ -84,10 +86,12 @@ assert CFG is not None
 init()
 
 
+
 def print_warning(msg):
     """Print helper for colored output.
     """
     cprint(msg, CFG['warning_text_color'])
+
 
 
 if not CFG['ignore_script_name_mismatch']:
@@ -99,9 +103,8 @@ if not CFG['ignore_script_name_mismatch']:
                       'file with the ignore_script_name_mismatch option.)\n')
 
 
-
-
 def main():
+    # pylint: disable=too-many-branches, too-many-statements
     """Entry point"""
     def nonnegative_int(number):
         """Int type for argparse that requires values >= 0"""
@@ -139,10 +142,12 @@ def main():
                         help='Limit the maximum amount of results shown.')
     parser.add_argument('-d', '--decompound',
                         action='store_true',
-                        help='Decompound the lexeme, using the first lookup result from the API as base.')
+                        help='Decompound the lexeme, using the first lookup result from the API '
+                             'as base.')
     parser.add_argument('-D', '--decompound_literal',
                         action='store_true',
-                        help='Same as --decompound, but use the "phrase" argument as-is, character by character.')
+                        help='Same as --decompound, but use the "phrase" argument as-is, '
+                             'character by character.')
     parser.add_argument('--timeout',
                         metavar='N', type=nonnegative_float, default=10.0,
                         help='Override for remote API connection timeout, in seconds. '
@@ -180,7 +185,7 @@ def main():
                 probably_timed_out = any(x in repr(err) for x in ('timeout', 'timed out'))
                 if probably_timed_out:
                     raise RuntimeError("It seems the API connection timed out. You may wish "
-                                       f"to override the timeout limit with --timeout.") from err
+                                       "to override the timeout limit with --timeout.") from err
             raise err
         resp.raise_for_status()
         expected_response = 200
@@ -236,9 +241,10 @@ def main():
             else:
                 word = primary_result['data'][0]['japanese'][0].get('word', None)
                 if word is None:
-                    print(f'Could not find decompoundable results for {colored(args.phrase, attrs=["bold"])} '
-                          f'(primary result was: "{primary_result["data"][0]["japanese"][0]}"). '
-                          'You may wish to decompound it literally with -D/--decompound_literal, instead.')
+                    print('Could not find decompoundable results for '
+                          f'{colored(args.phrase, attrs=["bold"])} (primary result was: '
+                          f'"{primary_result["data"][0]["japanese"][0]}"). You may wish to '
+                          'decompound it literally with -D/--decompound_literal, instead.')
                 else:
                     print(decompound(word))
                     stems += decompound(word)
@@ -249,59 +255,57 @@ def main():
     else:
         json_data.append(lookup(args.phrase))
 
+    def print_result_main(num, res):
+        if not args.decompound:
+            print(f'{num} result(s) for {colored(res, attrs=["bold"])}.')
+
+    def print_definition(word, reading, num_forms):
+        output = '\n' +\
+            colored('Definition'
+                    if num_forms == 0
+                    else '\tAlt. form', CFG['success_text_color']) + ': '
+        if word is not None:
+            output += word
+        elif reading is not None:
+            output += reading
+        if word is not None and reading is not None and reading != word:
+            output += ' (' + reading + ')'
+        if num_forms != 0:
+            output += ' (' + str(num_forms + 1) + ')'
+        print(output)
+
+    def enumerate_definitions(json_datum, start=1):
+        for i, definition in enumerate(json_datum["data"], start):
+            if args.decompound and i > start:
+                break
+            if i > args.max_results > 0:
+                break
+            for form_num, japanese in enumerate(definition['japanese']):
+                reading = japanese.get('reading')
+                word = japanese.get('word')
+                print_definition(word, reading, form_num)
+                # Alt. form; don't output same definitions again
+                if form_num != 0:
+                    continue
+                for _, sense in enumerate(definition['senses'], start=1):
+                    pos = ', '.join(sense['parts_of_speech'])
+                    print(f'\t({pos}):')
+                    for j, english in enumerate(sense['english_definitions'],
+                                                start=1):
+                        print(f'\t\t{j}: {english}')
+
     for json_datum in json_data:
         num_results = len(json_datum['data'])
         if num_results == 0:
             if not args.decompound:
                 print(f'No results for {colored(args.phrase, attrs=["bold"])}')
                 return
-
-        def print_result_main(num, res):
-            if not args.decompound:
-                print(f'{num} result(s) for {colored(res, attrs=["bold"])}.')
-
-        def print_definition(word, reading, num_forms):
-            output = '\n' +\
-                colored('Definition'
-                        if num_forms == 0
-                        else '\tAlt. form', CFG['success_text_color']) + ': '
-            if word is not None:
-                output += word
-            elif reading is not None:
-                output += reading
-            if word is not None and reading is not None and reading != word:
-                output += ' (' + reading + ')'
-            if num_forms != 0:
-                output += ' (' + str(num_forms + 1) + ')'
-            print(output)
-
         print_result_main(num_results, args.phrase)
         if args.decompound:
             print('Decompounding lexeme from API primary search result as per -d/--decompound.')
         elif 0 < args.max_results < num_results:
             print(f'Limiting output to {args.max_results} result(s) as per '
                   '-m/--max-results.')
-
-        def enumerate_definitions(json_datum, start=1):
-            for i, definition in enumerate(json_datum["data"], start):
-                if args.decompound and i > start:
-                    break
-                elif i > args.max_results > 0:
-                    break
-                for form_num, japanese in enumerate(definition['japanese']):
-                    reading = japanese.get('reading')
-                    word = japanese.get('word')
-                    print_definition(word, reading, form_num)
-                    # Alt. form; don't output same definitions again
-                    if form_num != 0:
-                        continue
-                    for _, sense in enumerate(definition['senses'], start=1):
-                        pos = ', '.join(sense['parts_of_speech'])
-                        print(f'\t({pos}):')
-                        for j, english in enumerate(sense['english_definitions'],
-                                                    start=1):
-                            print(f'\t\t{j}: {english}')
-
         enumerate_definitions(json_datum)
         print()
 
