@@ -12,7 +12,7 @@ A simple Python 3 CLI for searching the [Jisho.org](https://jisho.org/) Japanese
 
 ## Usage
 
-`jisho-cli` `[-h] [-m N] [--version]` `<one or more search keywords>`
+`jisho-cli` `[-h] [-m N] [-d] [-D] [--timeout N] [--version]` `<one or more search keywords>`
 
 ### Positional arguments
 - <one or more search keyword(s)>
@@ -20,6 +20,9 @@ A simple Python 3 CLI for searching the [Jisho.org](https://jisho.org/) Japanese
 ### Optional arguments
 - `-h, --help` ― `show this help message and exit`
 - `-m N, --max-results N` ― `Limit the maximum amount of results shown.`
+- `-d, --decompound` ― `Decompound the lexeme, using the first lookup result from the API as base.`
+- `-D, --decompound_literal` ― `Same as --decompound, but use the "search keywords" argument as-is, character by character.`
+- `--timeout` ― `Override for remote API connection timeout, in seconds. If value equals zero, disables API timeout entirely.`
 - `--version` ― `Show version number and exit.`
 
 ## Installation
