@@ -133,6 +133,7 @@ def main():
     parser.add_argument('phrase',
                         metavar='<one or more search keyword(s)>',
                         type=phrase_type,
+                        nargs='+',
                         help='Word(s) to perform a Jisho.org dictionary API '
                              'lookup with. Can be in English or Japanese '
                              '(rōmaji input is also supported).')
