@@ -42,7 +42,7 @@ import yaml
 from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.3.0'
+SCRIPT_VERSION = '0.4.0'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
@@ -230,19 +230,20 @@ def main():
                 res += stem['orig']
         return res
 
+    phrase = ' '.join(args.phrase)
     if args.decompound:
         stems = []
         if args.decompound_literal:
-            stems += decompound(args.phrase)
+            stems += decompound(phrase)
         else:
-            primary_result = lookup(args.phrase)
+            primary_result = lookup(phrase)
             if len(primary_result['data']) == 0:
-                print(f'No results for {colored(args.phrase, attrs=["bold"])}')
+                print(f'No results for {colored(phrase, attrs=["bold"])}')
             else:
                 word = primary_result['data'][0]['japanese'][0].get('word', None)
                 if word is None:
                     print('Could not find decompoundable results for '
-                          f'{colored(args.phrase, attrs=["bold"])} (primary result was: '
+                          f'{colored(phrase, attrs=["bold"])} (primary result was: '
                           f'"{primary_result["data"][0]["japanese"][0]}"). You may wish to '
                           'decompound it literally with -D/--decompound_literal, instead.')
                 else:
@@ -253,7 +254,7 @@ def main():
         for stem in stems:
             json_data.append(lookup(stem))
     else:
-        json_data.append(lookup(args.phrase))
+        json_data.append(lookup(phrase))
 
     def print_result_main(num, res):
         if not args.decompound:
@@ -298,9 +299,9 @@ def main():
         num_results = len(json_datum['data'])
         if num_results == 0:
             if not args.decompound:
-                print(f'No results for {colored(args.phrase, attrs=["bold"])}')
+                print(f'No results for {colored(phrase, attrs=["bold"])}')
                 return
-        print_result_main(num_results, args.phrase)
+        print_result_main(num_results, phrase)
         if args.decompound:
             print('Decompounding lexeme from API primary search result as per -d/--decompound.')
         elif 0 < args.max_results < num_results:
