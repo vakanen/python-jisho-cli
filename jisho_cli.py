@@ -22,7 +22,7 @@ import yaml
 from colorama import init
 from termcolor import colored, cprint
 
-SCRIPT_VERSION = '0.4.0'
+SCRIPT_VERSION = '0.5.0'
 SCRIPT_NAME = 'jisho_cli'
 
 CFG_PATH = os.path.join(appdirs.user_config_dir(SCRIPT_NAME), 'config.yml')
@@ -152,8 +152,11 @@ def main():
         Returns a JSON object.
         """
         url = CFG['api_base_url'] + '/search/words?keyword=' + phrase
+        headers = {'user-agent': f'script-{SCRIPT_NAME}/{SCRIPT_VERSION}'}
         try:
-            resp = requests.get(url, **{ 'timeout': None if args.timeout == 0 else args.timeout })
+            resp = requests.get(url,
+                                headers=headers,
+                                **{ 'timeout': None if args.timeout == 0 else args.timeout })
         except Exception as err:
             # --decompound is a special case where we might be doing several API lookups
             # in a row, so on timeout we suggest overriding that timeout limit.
