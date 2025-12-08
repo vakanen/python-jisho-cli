@@ -27,16 +27,16 @@ A simple Python 3 CLI for searching the [Jisho.org](https://jisho.org/) Japanese
 
 ## Installation
 
-One-liner install with [pipx](https://github.com/pypa/pipx):
+One-liner install with *[uv](https://docs.astral.sh/uv/)*:
 
 ```bash
-pipx install git+https://github.com/vakanen/python-jisho-cli.git
+uv tool install "git+https://github.com/vakanen/python-jisho-cli"
 ```
 
-Upgrade with pipx:
+Upgrade with *uv*:
 
 ```bash
-pipx upgrade jisho-cli
+uv tool upgrade jisho-cli
 ```
 
 Creating a config file (optional):
