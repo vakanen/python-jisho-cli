@@ -12,5 +12,10 @@ dependencies = [
     "requests>=2.32.5",
     "termcolor>=3.2.0",
 ]
-authors = ["vakanen <ge260vtan@mozmail.com>"]
-license = "GNU General Public License v3.0"
+authors = [
+    {name="vakanen", email="ge260vtan@mozmail.com"},
+]
+maintainers = [
+    {name="vakanen", email="ge260vtan@mozmail.com"},
+]
+license = "GPL-3.0-or-later"
