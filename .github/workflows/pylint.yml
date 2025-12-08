@@ -17,6 +17,6 @@ jobs:
     - name: Install the latest version of uv
       uses: astral-sh/setup-uv@v7
     - name: Install dependencies
-      run: uv tool instapp pylint
+      run: uv tool install pylint
     - name: Analysing the code with pylint
       run: uv tool run --with . pylint $(git ls-files '*.py')
