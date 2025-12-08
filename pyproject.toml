@@ -19,3 +19,5 @@ maintainers = [
     {name="vakanen", email="ge260vtan@mozmail.com"},
 ]
 license = "GPL-3.0-or-later"
+[project.scripts]
+jisho-cli = "jisho_cli:main"
