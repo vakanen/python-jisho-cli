@@ -1,31 +1,21 @@
-[tool.poetry]
+[project]
 name = "jisho-cli"
-version = "0.5.1"
+version = "1.0.0"
 description = "A simple Python 3 CLI for searching the Jisho.org Japanese language dictionary directly from the terminal."
-authors = ["vakanen <ge260vtan@mozmail.com>"]
-license = "GNU General Public License v3.0"
-
-[tool.poetry.dependencies]
-python = "^3.6"
-appdirs = "~1.4.4"
-certifi = ">=2024.2.2"
-chardet = "~4.0.0"
-colorama = "~0.4.4"
-idna = "^2.10"
-pykakasi = "~2.3.0"
-PyYAML = "~6.0.1"
-requests = "~2.27.1"
-termcolor = "~1.1.0"
-urllib3 = "~1.26.18"
-wincertstore = {version = "^0.2", markers = "sys_platform == 'win32' and python_version < '2.7.9'"}
-wrapt = "~1.16.0"
-
-[tool.poetry.dev-dependencies]
-pylint = "^2.14.5"
-
-[tool.poetry.scripts]
-jisho-cli = "jisho_cli:main"
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "appdirs>=1.4.4",
+    "colorama>=0.4.6",
+    "pykakasi>=2.3.0",
+    "pyyaml>=6.0.3",
+    "requests>=2.32.5",
+    "termcolor>=3.2.0",
+]
+authors = [
+    {name="vakanen", email="ge260vtan@mozmail.com"},
+]
+maintainers = [
+    {name="vakanen", email="ge260vtan@mozmail.com"},
+]
+license = "GPL-3.0-or-later"
