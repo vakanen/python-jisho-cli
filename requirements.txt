@@ -2,7 +2,7 @@
 #    uv export --format requirements.txt --no-hashes
 appdirs==1.4.4
     # via jisho-cli
-certifi>=2025.11.12
+certifi>=2026.1.4
     # via requests
 charset-normalizer==3.4.4
     # via requests
@@ -20,7 +20,7 @@ pyyaml==6.0.3
     # via jisho-cli
 requests==2.32.5
     # via jisho-cli
-termcolor==3.2.0
+termcolor==3.3.0
     # via jisho-cli
 urllib3==2.6.3
     # via requests
