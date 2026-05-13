@@ -22,7 +22,7 @@ requests==2.34.0
     # via jisho-cli
 termcolor==3.3.0
     # via jisho-cli
-urllib3==2.6.3
+urllib3==2.7.0
     # via requests
 wrapt==2.0.1
     # via deprecated
